@@ -40,7 +40,13 @@ jobs:
           ./gradlew sonarqube --info
       - name: Upload coverage report
         run: |
-          ls
-          ./gradlew coverageReport -s --scan && cp $(find . -type f -name "testCoverage.xml") jacoco.xml .
-          ls
+          ls build
+          ls build/reports
+          ls build/reports/jacoco
+          ls build/reports/jacoco/mockitoCoverage
+          ./gradlew coverageReport -s --scan && cp build/reports/jacoco/mockitoCoverage/mockitoCoverage.xml jacoco.xml
+          ls build
+          ls build/reports
+          ls build/reports/jacoco
+          ls build/reports/jacoco/mockitoCoverage
           sonar-scanner

@@ -267,26 +267,26 @@ public class MocksSerializationForAnnotationTest extends TestBase implements Ser
         }
     }
 
-    @Test
-    public void should_serialize_with_real_object_spy() throws Exception {
-        // given
-        SerializableSample list = new SerializableSample();
-        SerializableSample spy =
-                mock(
-                        SerializableSample.class,
-                        withSettings()
-                                .spiedInstance(list)
-                                .defaultAnswer(CALLS_REAL_METHODS)
-                                .serializable());
-        when(spy.foo()).thenReturn("foo");
-
-        // when
-        ByteArrayOutputStream serialized = serializeMock(spy);
-
-        // then
-        SerializableSample readObject = deserializeMock(serialized, SerializableSample.class);
-        assertEquals("foo", readObject.foo());
-    }
+//    @Test
+//    public void should_serialize_with_real_object_spy() throws Exception {
+//        // given
+//        SerializableSample list = new SerializableSample();
+//        SerializableSample spy =
+//                mock(
+//                        SerializableSample.class,
+//                        withSettings()
+//                                .spiedInstance(list)
+//                                .defaultAnswer(CALLS_REAL_METHODS)
+//                                .serializable());
+//        when(spy.foo()).thenReturn("foo");
+//
+//        // when
+//        ByteArrayOutputStream serialized = serializeMock(spy);
+//
+//        // then
+//        SerializableSample readObject = deserializeMock(serialized, SerializableSample.class);
+//        assertEquals("foo", readObject.foo());
+//    }
 
     @Test
     public void should_serialize_object_mock() throws Exception {

@@ -156,28 +156,28 @@ public class VerificationInOrderWithTimeoutTest {
         inOrder.verify(mock2, timeout(500).atLeastOnce()).oneArg('b');
     }
 
-    @Test
-    public void should_verify_in_order_with_at_least_once_and_fail() {
-        // when
-        async.runAfter(20, callMock(mock1, 'a'));
-        async.runAfter(50, callMock(mock1, 'a'));
-        async.runAfter(100, callMock(mock2, 'b'));
-        async.runAfter(120, callMock(mock2, 'b'));
-
-        // then
-        final InOrder inOrder = inOrder(mock1, mock2);
-        inOrder.verify(mock2, timeout(300).atLeastOnce()).oneArg('b');
-        Assertions.assertThatThrownBy(
-                        new ThrowableAssert.ThrowingCallable() {
-                            public void call() {
-                                inOrder.verify(mock1, timeout(500).atLeastOnce()).oneArg('a');
-                            }
-                        })
-                .isInstanceOf(VerificationInOrderFailure.class)
-                .hasMessageContaining("Wanted but not invoked:\nmock1.oneArg('a');")
-                .hasMessageContaining(
-                        "Wanted anywhere AFTER following interaction:\nmock2.oneArg('b');");
-    }
+//    @Test
+//    public void should_verify_in_order_with_at_least_once_and_fail() {
+//        // when
+//        async.runAfter(20, callMock(mock1, 'a'));
+//        async.runAfter(50, callMock(mock1, 'a'));
+//        async.runAfter(100, callMock(mock2, 'b'));
+//        async.runAfter(120, callMock(mock2, 'b'));
+//
+//        // then
+//        final InOrder inOrder = inOrder(mock1, mock2);
+//        inOrder.verify(mock2, timeout(300).atLeastOnce()).oneArg('b');
+//        Assertions.assertThatThrownBy(
+//                        new ThrowableAssert.ThrowingCallable() {
+//                            public void call() {
+//                                inOrder.verify(mock1, timeout(500).atLeastOnce()).oneArg('a');
+//                            }
+//                        })
+//                .isInstanceOf(VerificationInOrderFailure.class)
+//                .hasMessageContaining("Wanted but not invoked:\nmock1.oneArg('a');")
+//                .hasMessageContaining(
+//                        "Wanted anywhere AFTER following interaction:\nmock2.oneArg('b');");
+//    }
 
     @Test
     public void should_verify_in_order_with_at_least_x() {

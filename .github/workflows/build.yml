@@ -37,7 +37,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./gradlew build --info
-          ls build/reports
+          ./gradlew coverageReport
           ./gradlew sonarqube \
-             -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/mockitoCoverage/mockitoCoverage.xml
-
+            -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/mockitoCoverage/mockitoCoverage.xml \
+            --info

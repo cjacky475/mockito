@@ -35,5 +35,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonarqube -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/mockitoCoverage/mockitoCoverage.xml --info
-
+        run: |
+          ./gradlew build --info
+          ./gradlew sonarqube --info
+      - name: Upload coverage report
+        run: |
+          ./gradlew coverageReport -s --scan && cp build/reports/jacoco/testCoverage/testCoverage.xml jacoco.xml
+          sonar-scanner
